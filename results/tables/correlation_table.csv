@@ -1,0 +1,6 @@
+metric,label,spearman_rho,spearman_p,kendall_tau,kendall_p,pairwise_accuracy,roc_auc,n_pairs,significant
+composite,Composite,0.8576,0.0,0.7023,0.0,0.9628,0.9961,188,True
+clip_score,CLIP Score,0.8539,0.0,0.6994,0.0,0.9574,0.994,188,True
+motion_smoothness,Motion Smoothness,0.7365,0.0,0.6032,0.0,0.8404,0.9261,188,True
+lpips_temporal,LPIPS Temporal,0.735,0.0,0.602,0.0,0.8245,0.9252,188,True
+fvd_score,FVD (pairwise),0.5539,0.0,0.4536,0.0,0.7394,0.8205,188,True

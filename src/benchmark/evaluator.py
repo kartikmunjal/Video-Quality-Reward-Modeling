@@ -12,8 +12,8 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
-from ..data.video_utils import load_video_frames
-from ..metrics import (
+from data.video_utils import load_video_frames
+from metrics import (
     CLIPScore,
     FVDScore,
     LPIPSTemporal,
