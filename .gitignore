@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Data — videos are large, only keep metadata
+data/videos/
+data/generated/
+data/**/*.mp4
+data/**/*.avi
+data/**/*.mov
+
+# Model checkpoints
+checkpoints/
+*.pth
+*.pt
+*.safetensors
+*.bin
+*.joblib
+
+# Experiment tracking
+wandb/
+.wandb/
+mlruns/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Results (large figures kept locally)
+results/figures/*.png
+results/figures/*.pdf
