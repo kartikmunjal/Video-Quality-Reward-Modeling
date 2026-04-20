@@ -39,6 +39,21 @@ pairs (3 annotators each, Cohen's κ = 0.71) and asks: which signal — or combi
 
 Full analysis: [notebooks/02_correlation_analysis.ipynb](notebooks/02_correlation_analysis.ipynb)
 
+## Research Lineage
+
+This repo is the evaluation layer for the video preference-alignment stack:
+
+| Stage | Repo | Role |
+|-------|------|------|
+| Data | [`Video-Curation`](https://github.com/kartikmunjal/Video-Curation) | Produces curated and synthetic video mixtures for downstream experiments. |
+| Training | [`Video-Generation`](https://github.com/kartikmunjal/Video-Generation) | Trains LoRA and DiffusionDPO models whose outputs are scored here. |
+| Reward validation | `Video-Quality-Reward-Modeling` | Tests whether automated quality signals actually agree with human preferences. |
+
+The reward-design framing follows
+[`rlhf-and-reward-modelling-alt`](https://github.com/kartikmunjal/rlhf-and-reward-modelling-alt):
+define candidate reward signals, validate them against held-out preference data,
+then only report training improvements whose metrics have human-correlation support.
+
 ## Composite Reward Weights
 
 ```
