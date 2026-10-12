@@ -1,0 +1,95 @@
+{
+  "study_id": "ucf101_quality_reward_v1",
+  "models": [
+    {
+      "official_split": 1,
+      "n_train_pairs": 3600,
+      "n_test_pairs": 1800,
+      "n_train_sources": 1554,
+      "n_test_sources": 648,
+      "test_accuracy": {
+        "estimate": 0.9783333333333334,
+        "ci95": [
+          0.9710876149551761,
+          0.9849452246723421
+        ]
+      },
+      "test_roc_auc": {
+        "estimate": 0.9969838575264669,
+        "ci95": [
+          0.9954009449045738,
+          0.9982949690214469
+        ]
+      },
+      "bootstrap_replicates": 2000,
+      "features": [
+        "spatial_detail_log",
+        "brightness_mean",
+        "temporal_delta_mean",
+        "temporal_jerk_mean",
+        "block_boundary_energy"
+      ],
+      "checkpoint": "reward_split1.joblib"
+    },
+    {
+      "official_split": 2,
+      "n_train_pairs": 3600,
+      "n_test_pairs": 1800,
+      "n_train_sources": 1562,
+      "n_test_sources": 648,
+      "test_accuracy": {
+        "estimate": 0.97,
+        "ci95": [
+          0.9613227081369939,
+          0.9783724541176441
+        ]
+      },
+      "test_roc_auc": {
+        "estimate": 0.9962065766670496,
+        "ci95": [
+          0.9943372219000557,
+          0.9977707816392535
+        ]
+      },
+      "bootstrap_replicates": 2000,
+      "features": [
+        "spatial_detail_log",
+        "brightness_mean",
+        "temporal_delta_mean",
+        "temporal_jerk_mean",
+        "block_boundary_energy"
+      ],
+      "checkpoint": "reward_split2.joblib"
+    },
+    {
+      "official_split": 3,
+      "n_train_pairs": 3600,
+      "n_test_pairs": 1800,
+      "n_train_sources": 1549,
+      "n_test_sources": 632,
+      "test_accuracy": {
+        "estimate": 0.9794444444444445,
+        "ci95": [
+          0.9724401690075903,
+          0.9855557040998217
+        ]
+      },
+      "test_roc_auc": {
+        "estimate": 0.9975333059256213,
+        "ci95": [
+          0.9961199886780479,
+          0.9986524808689018
+        ]
+      },
+      "bootstrap_replicates": 2000,
+      "features": [
+        "spatial_detail_log",
+        "brightness_mean",
+        "temporal_delta_mean",
+        "temporal_jerk_mean",
+        "block_boundary_energy"
+      ],
+      "checkpoint": "reward_split3.joblib"
+    }
+  ]
+}

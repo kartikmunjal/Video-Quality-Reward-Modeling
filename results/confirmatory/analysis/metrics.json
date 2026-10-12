@@ -1,0 +1,386 @@
+{
+  "study_id": "ucf101_quality_reward_v1",
+  "metrics": {
+    "block_boundary_energy": {
+      "n_trials": 3,
+      "n_pairs": 5400,
+      "bootstrap_replicates": 2000,
+      "accuracy": {
+        "estimate": 0.8137037037037037,
+        "ci95": [
+          0.802962962962963,
+          0.8240740740740741
+        ]
+      },
+      "roc_auc": {
+        "estimate": 0.932549900475487,
+        "ci95": [
+          0.9267460401551079,
+          0.9385496349611782
+        ]
+      },
+      "severity_spearman_rho": {
+        "estimate": 0.18014323824413417,
+        "ci95": [
+          0.15156813453504306,
+          0.2092049928140163
+        ]
+      }
+    },
+    "brightness_mean": {
+      "n_trials": 3,
+      "n_pairs": 5400,
+      "bootstrap_replicates": 2000,
+      "accuracy": {
+        "estimate": 0.6568518518518518,
+        "ci95": [
+          0.6349953703703703,
+          0.6774074074074075
+        ]
+      },
+      "roc_auc": {
+        "estimate": 0.7669266783726354,
+        "ci95": [
+          0.7556453955542202,
+          0.7841302002894457
+        ]
+      },
+      "severity_spearman_rho": {
+        "estimate": 0.020070545404139526,
+        "ci95": [
+          -0.006880204739101574,
+          0.04743831647752391
+        ]
+      }
+    },
+    "composite": {
+      "n_trials": 3,
+      "n_pairs": 5400,
+      "bootstrap_replicates": 2000,
+      "accuracy": {
+        "estimate": 0.674074074074074,
+        "ci95": [
+          0.6612916666666666,
+          0.687037037037037
+        ]
+      },
+      "roc_auc": {
+        "estimate": 0.8034438540852243,
+        "ci95": [
+          0.7915753360537376,
+          0.8147083804593908
+        ]
+      },
+      "severity_spearman_rho": {
+        "estimate": 0.22807302668664264,
+        "ci95": [
+          0.19714051594546217,
+          0.25845236400616034
+        ]
+      }
+    },
+    "spatial_detail_log": {
+      "n_trials": 3,
+      "n_pairs": 5400,
+      "bootstrap_replicates": 2000,
+      "accuracy": {
+        "estimate": 0.8231481481481482,
+        "ci95": [
+          0.8105555555555556,
+          0.8357407407407408
+        ]
+      },
+      "roc_auc": {
+        "estimate": 0.93735196337465,
+        "ci95": [
+          0.9302955380848071,
+          0.9450199496603462
+        ]
+      },
+      "severity_spearman_rho": {
+        "estimate": 0.23223234149366098,
+        "ci95": [
+          0.2051097500063046,
+          0.25871666998815973
+        ]
+      }
+    },
+    "temporal_delta_mean": {
+      "n_trials": 3,
+      "n_pairs": 5400,
+      "bootstrap_replicates": 2000,
+      "accuracy": {
+        "estimate": 0.835925925925926,
+        "ci95": [
+          0.825925925925926,
+          0.8461111111111111
+        ]
+      },
+      "roc_auc": {
+        "estimate": 0.7289342981817245,
+        "ci95": [
+          0.7118452608770616,
+          0.7447524644359141
+        ]
+      },
+      "severity_spearman_rho": {
+        "estimate": 0.3996608339026204,
+        "ci95": [
+          0.36741985198271737,
+          0.4299843486816123
+        ]
+      }
+    },
+    "temporal_jerk_mean": {
+      "n_trials": 3,
+      "n_pairs": 5400,
+      "bootstrap_replicates": 2000,
+      "accuracy": {
+        "estimate": 0.8318518518518518,
+        "ci95": [
+          0.8216666666666667,
+          0.842037037037037
+        ]
+      },
+      "roc_auc": {
+        "estimate": 0.7150892167395443,
+        "ci95": [
+          0.6977430572697885,
+          0.7314438650255597
+        ]
+      },
+      "severity_spearman_rho": {
+        "estimate": 0.3608374015526878,
+        "ci95": [
+          0.32567974144389017,
+          0.39393688362202767
+        ]
+      }
+    }
+  },
+  "by_degradation_family": {
+    "brightness_multiplier": {
+      "n_trials": 3,
+      "n_pairs": 900,
+      "bootstrap_replicates": 2000,
+      "accuracy": {
+        "estimate": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "roc_auc": {
+        "estimate": 1.0,
+        "ci95": [
+          0.9999999999999999,
+          1.0
+        ]
+      },
+      "severity_spearman_rho": {
+        "estimate": 0.3024850992540961,
+        "ci95": [
+          0.2518279481654515,
+          0.35467636384162704
+        ]
+      }
+    },
+    "downsample_short_side": {
+      "n_trials": 3,
+      "n_pairs": 900,
+      "bootstrap_replicates": 2000,
+      "accuracy": {
+        "estimate": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "roc_auc": {
+        "estimate": 1.0,
+        "ci95": [
+          0.9999999999999999,
+          1.0
+        ]
+      },
+      "severity_spearman_rho": {
+        "estimate": 0.3717393604383944,
+        "ci95": [
+          0.2858885311861237,
+          0.4521823892005859
+        ]
+      }
+    },
+    "frame_drop_fraction": {
+      "n_trials": 3,
+      "n_pairs": 900,
+      "bootstrap_replicates": 2000,
+      "accuracy": {
+        "estimate": 0.022222222222222223,
+        "ci95": [
+          0.011111111111111112,
+          0.035555555555555556
+        ]
+      },
+      "roc_auc": {
+        "estimate": 0.0038492136041782974,
+        "ci95": [
+          0.001078488218389148,
+          0.007726627426712811
+        ]
+      },
+      "severity_spearman_rho": {
+        "estimate": 0.4291564649836176,
+        "ci95": [
+          0.34938667798144407,
+          0.505464912837437
+        ]
+      }
+    },
+    "gaussian_blur_sigma": {
+      "n_trials": 3,
+      "n_pairs": 900,
+      "bootstrap_replicates": 2000,
+      "accuracy": {
+        "estimate": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "roc_auc": {
+        "estimate": 1.0,
+        "ci95": [
+          0.9999999999999999,
+          1.0
+        ]
+      },
+      "severity_spearman_rho": {
+        "estimate": 0.7916928153538327,
+        "ci95": [
+          0.7616641892604537,
+          0.817348126492629
+        ]
+      }
+    },
+    "h264_crf": {
+      "n_trials": 3,
+      "n_pairs": 900,
+      "bootstrap_replicates": 2000,
+      "accuracy": {
+        "estimate": 0.9922222222222222,
+        "ci95": [
+          0.9855555555555555,
+          0.9977777777777778
+        ]
+      },
+      "roc_auc": {
+        "estimate": 0.9998811710592115,
+        "ci95": [
+          0.9996524490601968,
+          1.0
+        ]
+      },
+      "severity_spearman_rho": {
+        "estimate": 0.6670639978273808,
+        "ci95": [
+          0.6252328960851591,
+          0.7061629925123608
+        ]
+      }
+    },
+    "temporal_permutation_window": {
+      "n_trials": 3,
+      "n_pairs": 900,
+      "bootstrap_replicates": 2000,
+      "accuracy": {
+        "estimate": 0.03,
+        "ci95": [
+          0.017750000000000002,
+          0.044444444444444446
+        ]
+      },
+      "roc_auc": {
+        "estimate": 0.004999728006883903,
+        "ci95": [
+          0.00140974308813772,
+          0.010680264881686666
+        ]
+      },
+      "severity_spearman_rho": {
+        "estimate": 0.4573963394156096,
+        "ci95": [
+          0.3748327018448214,
+          0.5355590836405423
+        ]
+      }
+    }
+  },
+  "paired_comparisons": [
+    {
+      "comparison": "composite_minus_block_boundary_energy",
+      "estimate": -0.13962962962962963,
+      "ci95": [
+        -0.14907407407407408,
+        -0.12962500000000002
+      ],
+      "p_raw": 0.0,
+      "n_trials": 3,
+      "n_pairs": 5400,
+      "bootstrap_replicates": 2000,
+      "p_holm": 0.0
+    },
+    {
+      "comparison": "composite_minus_brightness_mean",
+      "estimate": 0.017222222222222222,
+      "ci95": [
+        -0.0044444444444444444,
+        0.041296296296296296
+      ],
+      "p_raw": 0.156,
+      "n_trials": 3,
+      "n_pairs": 5400,
+      "bootstrap_replicates": 2000,
+      "p_holm": 0.156
+    },
+    {
+      "comparison": "composite_minus_spatial_detail_log",
+      "estimate": -0.14907407407407408,
+      "ci95": [
+        -0.1622222222222222,
+        -0.1372175925925926
+      ],
+      "p_raw": 0.0,
+      "n_trials": 3,
+      "n_pairs": 5400,
+      "bootstrap_replicates": 2000,
+      "p_holm": 0.0
+    },
+    {
+      "comparison": "composite_minus_temporal_delta_mean",
+      "estimate": -0.16185185185185186,
+      "ci95": [
+        -0.17222685185185185,
+        -0.1514814814814815
+      ],
+      "p_raw": 0.0,
+      "n_trials": 3,
+      "n_pairs": 5400,
+      "bootstrap_replicates": 2000,
+      "p_holm": 0.0
+    },
+    {
+      "comparison": "composite_minus_temporal_jerk_mean",
+      "estimate": -0.15777777777777777,
+      "ci95": [
+        -0.16870833333333335,
+        -0.14666666666666667
+      ],
+      "p_raw": 0.0,
+      "n_trials": 3,
+      "n_pairs": 5400,
+      "bootstrap_replicates": 2000,
+      "p_holm": 0.0
+    }
+  ]
+}

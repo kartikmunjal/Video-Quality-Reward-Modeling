@@ -1,5 +1,7 @@
 {
   "metadata": {
+    "evidence_status": "legacy_unverified_do_not_cite",
+    "evidence_note": "Raw videos and platform annotation export are unavailable; excluded from ucf101_quality_reward_v1.",
     "version": "1.0",
     "num_pairs": 200,
     "num_annotators": 3,

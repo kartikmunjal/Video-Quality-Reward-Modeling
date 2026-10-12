@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "study_id": "ucf101_quality_reward_v1",
+  "generated_by": "scripts/publish_confirmatory_report.py",
+  "raw_scored_pairs": 16200,
+  "artifacts": [
+    {
+      "path": "results/confirmatory/intervention_scores.jsonl",
+      "bytes": 14373627,
+      "sha256": "e7bccca12ffb3352f91b36c41807051f8f61432f7efc98980ff3765d5b702397"
+    },
+    {
+      "path": "results/confirmatory/analysis/metrics.json",
+      "bytes": 8988,
+      "sha256": "c2ee4ba4fbfa7fcabb72f88c6fb91de887a5f100493280d8296a13a9df0ce7b1"
+    },
+    {
+      "path": "results/confirmatory/models/fit_metrics.json",
+      "bytes": 2352,
+      "sha256": "569ef69333b8aff3b48597466bd175ff4e8bff300427dea521a8f4bbaccf11a6"
+    },
+    {
+      "path": "preregistration_manifest.json",
+      "bytes": 1213,
+      "sha256": "df26f54a2ce82df8613c3d5c0cbbb610d8552e8f55187f561c7afed70c2d4de8"
+    },
+    {
+      "path": "results/confirmatory/environment.json",
+      "bytes": 3017,
+      "sha256": "131575a75dfa1a2c70a24b5594825c0de13f33094e9b3fd8994872e5a1c72a56"
+    },
+    {
+      "path": "results/confirmatory/models/reward_split1.joblib",
+      "bytes": 2302,
+      "sha256": "cb232ed46fa7030fe77915a6ad901c06b11f19fbf99b9da6a05e10eb4fe711c4"
+    },
+    {
+      "path": "results/confirmatory/models/reward_split2.joblib",
+      "bytes": 2302,
+      "sha256": "f8a12c74c859fdcb370acf3117f0d78baf80e6a97a57f4b65ce9fcfaa6770040"
+    },
+    {
+      "path": "results/confirmatory/models/reward_split3.joblib",
+      "bytes": 2302,
+      "sha256": "41ababeed7520aa88d32f1154258f8a10af0eb1997ea17fc90d62bf2772f7737"
+    }
+  ],
+  "report": {
+    "path": "results/confirmatory/REPORT.md",
+    "bytes": 4415,
+    "sha256": "c88476da2851fde472bb0a4566937ff9653e38d9f32ace0d07e5f9e2b9d8054b"
+  },
+  "readme": {
+    "path": "README.md",
+    "bytes": 5890,
+    "sha256": "9e2f2c71126be5eb0270382b016b75187d0d134fbbf7188fa0217aa480627c2a"
+  }
+}

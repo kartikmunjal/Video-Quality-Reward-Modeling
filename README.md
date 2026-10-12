@@ -1,155 +1,114 @@
-# Video Quality Reward Modeling
+# Intervention-Validated Video Quality Rewards
 
-Benchmarking automated video quality metrics against human preference judgements.
+Research software for evaluating video-quality metrics against controlled,
+source-grouped degradation interventions.
 
-Which automated signals actually predict what humans prefer? This project answers
-that question with a systematic evaluation across five metrics, a 200-pair
-human-annotated preference dataset, and Spearman/Kendall correlation analysis.
+## Evidence status
 
-## Motivation
+The controlled-intervention confirmatory study is **complete**. Its generated
+report and hashed evidence manifest are in
+[`results/confirmatory/`](results/confirmatory/). The former
+200-pair preference file and its reported correlations are retained only as a
+legacy fixture: their raw video and annotation provenance is insufficient for
+confirmatory use. No human-preference, Prolific, correlation, or metric-
+superiority claim from that file is endorsed here.
 
-Human annotation doesn't scale. Production video generation pipelines need automated
-quality signals that reliably proxy human judgement. Most metrics are evaluated in
-isolation — CLIP score tells you about prompt adherence, LPIPS tells you about
-temporal consistency, FVD tells you about distributional realism. None of them
-individually predicts human preference as well as you'd hope.
+See [RESEARCH_PLAN.md](RESEARCH_PLAN.md) and
+[configs/study_v1.json](configs/study_v1.json).
+See [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) for execution order and
+artifact gates.
 
-This project benchmarks all of them together against 200 human-annotated preference
-pairs (3 annotators each, Cohen's κ = 0.71) and asks: which signal — or combination
-— best predicts what people actually prefer?
+## Study design
 
-## Results
+Clean UCF-101 videos are paired with deterministic descendants produced by six
+frozen degradation families. Metrics must rank clean over degraded clips and
+recover severity ordering on unseen source videos. The primary robustness test
+holds out an entire degradation family while fitting the composite reward.
 
-**188 non-tie pairs, 4 models (CogVideoX-2b base/LoRA, ZeroScope, ModelScopeT2V).**
+All partitions are source-grouped and inherit the three official UCF-101
+splits. Results report `N_trials=3`, pair counts, and paired hierarchical-
+bootstrap 95% confidence intervals. Composite weights are training-side only.
+The report retains a severe unseen-temporal-family failure and constrains the
+supported claim accordingly; aggregate accuracy is not presented as general
+perceptual validity.
 
-| Metric | Spearman ρ | Pairwise Acc. | ROC-AUC |
-|--------|:----------:|:-------------:|:-------:|
-| **Composite** | **0.858** | **96.3%** | **0.996** |
-| CLIP Score | 0.854 | 95.7% | 0.994 |
-| Motion Smoothness | 0.737 | 84.0% | 0.926 |
-| LPIPS Temporal | 0.735 | 82.5% | 0.925 |
-| FVD (pairwise) | 0.554 | 73.9% | 0.821 |
+<!-- BEGIN GENERATED CONFIRMATORY RESULTS -->
+## Confirmatory results
 
-**Key takeaways:**
-- The composite reward (ρ=0.858, acc=96.3%) is the strongest single predictor.
-- CLIP score alone (ρ=0.854) is nearly as good for semantic alignment but misses motion quality.
-- Motion smoothness and LPIPS carry distinct, complementary signal; together they push composite above CLIP.
-- FVD as a pairwise metric is noisier than the other signals — useful for distributional eval but not pairwise ranking.
-- Composite wins most clearly on pairs where motion quality and prompt adherence trade off against each other.
+The study scored **16,200 deterministic clean/degraded pairs** across six
+families and **`N_trials=3` official UCF-101 splits**, using **2,000 bootstrap
+replicates**. These labels identify controlled interventions, not human
+preference.
 
-Full analysis: [notebooks/02_correlation_analysis.ipynb](notebooks/02_correlation_analysis.ipynb)
+### Primary leave-one-degradation-family-out result
 
-## Research Lineage
+- Composite accuracy: **67.41% [66.13%, 68.70%]** on **5,400 held-out pairs**.
+- Composite ROC-AUC: **0.803 [0.792, 0.815]**.
+- Severity association: Spearman rho **0.228 [0.197, 0.258]**.
 
-This repo is the evaluation layer for the video preference-alignment stack:
+| Held-out family | Accuracy (95% CI) | ROC-AUC (95% CI) | Severity rho (95% CI) | Pairs |
+|---|---:|---:|---:|---:|
+| `brightness_multiplier` | 100.00% [100.00%, 100.00%] | 1.000 [1.000, 1.000] | 0.302 [0.252, 0.355] | 900 |
+| `downsample_short_side` | 100.00% [100.00%, 100.00%] | 1.000 [1.000, 1.000] | 0.372 [0.286, 0.452] | 900 |
+| `frame_drop_fraction` | 2.22% [1.11%, 3.56%] | 0.004 [0.001, 0.008] | 0.429 [0.349, 0.505] | 900 |
+| `gaussian_blur_sigma` | 100.00% [100.00%, 100.00%] | 1.000 [1.000, 1.000] | 0.792 [0.762, 0.817] | 900 |
+| `h264_crf` | 99.22% [98.56%, 99.78%] | 1.000 [1.000, 1.000] | 0.667 [0.625, 0.706] | 900 |
+| `temporal_permutation_window` | 3.00% [1.78%, 4.44%] | 0.005 [0.001, 0.011] | 0.457 [0.375, 0.536] | 900 |
 
-| Stage | Repo | Role |
-|-------|------|------|
-| Data | [`Video-Curation`](https://github.com/kartikmunjal/Video-Curation) | Produces curated and synthetic video mixtures for downstream experiments. |
-| Training | [`Video-Generation`](https://github.com/kartikmunjal/Video-Generation) | Trains LoRA and DiffusionDPO models whose outputs are scored here. |
-| Reward validation | `Video-Quality-Reward-Modeling` | Tests whether automated quality signals actually agree with human preferences. |
+The composite generalized almost perfectly to the four spatial/luminance or
+codec families but reversed direction on unseen frame dropping and temporal
+permutation. This temporal failure is part of the primary result.
 
-The reward-design framing follows
-[`rlhf-and-reward-modelling-alt`](https://github.com/kartikmunjal/rlhf-and-reward-modelling-alt):
-define candidate reward signals, validate them against held-out preference data,
-then only report training improvements whose metrics have human-correlation support.
+### Fixed metric results under family shift
 
-## Composite Reward Weights
+| Metric | Accuracy (95% CI) | ROC-AUC (95% CI) | Severity rho (95% CI) |
+|---|---:|---:|---:|
+| `block_boundary_energy` | 81.37% [80.30%, 82.41%] | 0.933 [0.927, 0.939] | 0.180 [0.152, 0.209] |
+| `brightness_mean` | 65.69% [63.50%, 67.74%] | 0.767 [0.756, 0.784] | 0.020 [-0.007, 0.047] |
+| `composite` | 67.41% [66.13%, 68.70%] | 0.803 [0.792, 0.815] | 0.228 [0.197, 0.258] |
+| `spatial_detail_log` | 82.31% [81.06%, 83.57%] | 0.937 [0.930, 0.945] | 0.232 [0.205, 0.259] |
+| `temporal_delta_mean` | 83.59% [82.59%, 84.61%] | 0.729 [0.712, 0.745] | 0.400 [0.367, 0.430] |
+| `temporal_jerk_mean` | 83.19% [82.17%, 84.20%] | 0.715 [0.698, 0.731] | 0.361 [0.326, 0.394] |
 
-```
-Composite = 0.45 × CLIP + 0.25 × LPIPS_temporal + 0.20 × motion_smoothness + 0.10 × FVD
-```
+### Paired composite-versus-component accuracy differences
 
-Weights were chosen based on the ablation study in the companion
-[Video-Generation](https://github.com/kartikmunjal/Video-Generation) repo
-(reward training ablation, Table 3). CLIP carries the largest weight because
-prompt adherence is the primary failure mode in text-to-video generation.
+| Comparison | Difference (95% CI) | Holm-adjusted p | Pairs |
+|---|---:|---:|---:|
+| `composite_minus_block_boundary_energy` | -13.963 pp [-14.907, -12.963] | <0.0005 | 5,400 |
+| `composite_minus_brightness_mean` | 1.722 pp [-0.444, 4.130] | 0.156 | 5,400 |
+| `composite_minus_spatial_detail_log` | -14.907 pp [-16.222, -13.722] | <0.0005 | 5,400 |
+| `composite_minus_temporal_delta_mean` | -16.185 pp [-17.223, -15.148] | <0.0005 | 5,400 |
+| `composite_minus_temporal_jerk_mean` | -15.778 pp [-16.871, -14.667] | <0.0005 | 5,400 |
 
-## Metrics
+### Operational all-family models for the downstream study
 
-| Metric | What It Measures | Implementation |
-|--------|-----------------|---------------|
-| CLIP Score | Prompt–video semantic alignment | CLIP ViT-B/32, avg over 4 frames |
-| LPIPS Temporal | Frame-to-frame perceptual consistency | LPIPS AlexNet, consecutive frames |
-| Motion Smoothness | Optical flow stability | Farneback dense flow, CV of magnitude |
-| FVD (pairwise) | Feature-space realism | R3D-18 I3D features, cosine similarity |
-| **Composite** | Weighted combination | Weighted sum, all normalized to [0, 1] |
+| Official split | Accuracy (source-clustered 95% CI) | ROC-AUC (95% CI) | Train/test pairs |
+|---:|---:|---:|---:|
+| 1 | 97.83% [97.11%, 98.49%] | 0.997 [0.995, 0.998] | 3,600/1,800 |
+| 2 | 97.00% [96.13%, 97.84%] | 0.996 [0.994, 0.998] | 3,600/1,800 |
+| 3 | 97.94% [97.24%, 98.56%] | 0.998 [0.996, 0.999] | 3,600/1,800 |
 
-## Project Structure
+These operational scores apply only to source-disjoint pairs from the six
+trained intervention families. They do not establish human-preference or
+open-ended perceptual validity.
+<!-- END GENERATED CONFIRMATORY RESULTS -->
 
-```
-├── src/
-│   ├── metrics/          # CLIP, LPIPS, motion, FVD, composite implementations
-│   ├── data/             # Preference dataset loader + video utils
-│   └── benchmark/        # Evaluator, correlation analysis, report generator
-├── data/
-│   └── human_preferences/  # 200 annotated preference pairs + sample prompts
-├── scripts/
-│   ├── score_videos.py      # Compute all metrics on a video directory
-│   ├── run_benchmark.py     # Full benchmark pipeline
-│   └── generate_report.py   # Regenerate figures from saved results
-├── notebooks/
-│   ├── 01_metric_exploration.ipynb     # Score distributions, inter-metric correlations
-│   ├── 02_correlation_analysis.ipynb   # Human preference correlation (main result)
-│   └── 03_results_visualization.ipynb  # Publication-ready figures
-└── results/
-    ├── tables/   # correlation_table.csv, model_metric_means.csv
-    └── figures/  # Saved plots
-```
+## Metric terminology
 
-## Quick Start
+Per-video reference-feature distance is named literally. “FVD” is reserved for
+Fréchet distance between two video distributions. Confirmatory execution fails
+if pretrained weights or reference features are missing; random-backbone
+fallbacks are prohibited.
 
-```bash
-git clone git@github.com:kartikmunjal/Video-Quality-Reward-Modeling.git
-cd Video-Quality-Reward-Modeling
-pip install -e .
+## Layout
 
-# Reproduce the benchmark from pre-computed scores in preferences.json
-# (no video files needed — scores are embedded in the dataset)
-PYTHONPATH=src python scripts/run_benchmark.py \
-    --preferences data/human_preferences/preferences.json \
-    --output_dir results/
+- `src/metrics/`: component metric implementations.
+- `src/benchmark/`: source-grouped evaluation and statistical analysis.
+- `configs/study_v1.json`: frozen interventions and inference settings.
+- `data/human_preferences/`: legacy fixture excluded from the new study.
+- `results/confirmatory/`: raw pair lineage and scores, predictions, fitted
+  checkpoints, generated report, and SHA-256 artifact manifest.
 
-# Score your own videos
-python scripts/score_videos.py \
-    --video_dir path/to/videos/ \
-    --prompts data/sample_prompts.txt \
-    --output results/scores.csv
-
-# Regenerate all figures
-python scripts/generate_report.py --results_dir results/
-```
-
-## Dataset
-
-200 pairwise preference pairs across 4 text-to-video models, 3 annotators per pair.
-
-- **Prompts:** 70 diverse natural-language descriptions (EvalCrafter + custom)
-- **Models:** CogVideoX-2b (base), CogVideoX-2b + LoRA fine-tune, ZeroScope v2, ModelScopeT2V
-- **Annotation:** Majority vote (2-of-3), confidence self-reported
-- **Agreement:** Cohen's κ = 0.71 (substantial), raw agreement 83%
-- **Ties:** 12 pairs (6%) excluded from correlation analysis
-
-Each pair includes pre-computed metric scores for both videos, so the full
-correlation analysis runs without video files. Video files (~18 GB) are
-available separately — see [data/human_preferences/README.md](data/human_preferences/README.md).
-
-## Relation to Video-Generation
-
-This project benchmarks the automated signals first defined in
-[Video-Generation](https://github.com/kartikmunjal/Video-Generation)'s
-`src/data/video_metrics.py`, adds FVD via I3D features, and provides
-the missing validation layer: systematic Spearman correlation with human
-preference data. It is the evaluation harness for the reward model
-trained there.
-
-## Requirements
-
-```
-torch>=2.1.0  torchvision>=0.16.0  transformers>=4.40.0
-decord>=0.6.0  opencv-python>=4.9.0  lpips>=0.1.4  einops>=0.7.0
-numpy>=1.26.0  pandas>=2.1.0  scipy>=1.12.0  scikit-learn>=1.3.0
-matplotlib>=3.8.0  seaborn>=0.13.0  tqdm>=4.66.0
-```
-
-See [requirements.txt](requirements.txt) for the full pinned list.
+Human external-validity work requires a separate frozen protocol with raw
+anonymized annotations, recruitment and exclusion rules, attention checks, and
+sample-size justification.

@@ -53,8 +53,10 @@ class _I3DExtractor(nn.Module):
             from torchvision.models.video import r3d_18, R3D_18_Weights
             backbone = r3d_18(weights=R3D_18_Weights.KINETICS400_V1)
         except Exception:
-            from torchvision.models.video import r3d_18
-            backbone = r3d_18(pretrained=False)
+            raise RuntimeError(
+                "KINETICS400_V1 weights are required. A randomly initialized "
+                "video backbone cannot produce a research-valid quality score."
+            )
 
         # Remove final classification head, keep up to the avgpool
         self.features = nn.Sequential(*list(backbone.children())[:-1])
@@ -71,7 +73,7 @@ class _I3DExtractor(nn.Module):
         return out.flatten(1)           # (B, 512)
 
 
-class FVDScore(VideoMetric):
+class ReferenceFeatureDistance(VideoMetric):
     """
     Pairwise realism score based on I3D feature distances.
 
@@ -104,7 +106,7 @@ class FVDScore(VideoMetric):
 
     @property
     def name(self) -> str:
-        return "fvd_score"
+        return "reference_feature_score"
 
     def _extract_features(self, frames: np.ndarray) -> np.ndarray:
         """Extract I3D features from (T, H, W, C) float32 frames."""
@@ -163,6 +165,11 @@ class FVDScore(VideoMetric):
             raw=round(score, 4),
             metadata={"feat_dim": feats.shape[-1], "has_reference": self.reference_features is not None},
         )
+
+
+# Backward-compatible import only. Reports and new data must use the literal
+# metric name returned above; this alias must not be described as per-video FVD.
+FVDScore = ReferenceFeatureDistance
 
 
 def compute_fvd(

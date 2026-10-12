@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "study_id": "ucf101_quality_reward_v1",
+  "frozen_at_utc": "2026-09-29T01:27:22.462164+00:00",
+  "config_sha256": "0a4917e7e341ef33dc6e6efad19e7ad87d371c7b29e418ff73a940ccb161b53e",
+  "primary_inputs": [
+    {
+      "path": "C:\\Users\\Kunal Munjal\\Downloads\\video_research\\video-curation\\preregistration_manifest.json",
+      "bytes": 1928,
+      "sha256": "84ffe472c255d0f36c3cbd5282ee27068fd6f46ebfce510e15fe0f6498886b85"
+    },
+    {
+      "path": "C:\\Users\\Kunal Munjal\\Downloads\\video_research\\video-curation\\protocol_amendment_001.md",
+      "bytes": 1196,
+      "sha256": "554102be3c4c4f7e69af9e68ffd012fc36c14733f8796c1cb960c0c637d4e3e6"
+    },
+    {
+      "path": "C:\\Users\\Kunal Munjal\\Downloads\\video_research\\video-curation\\protocol_amendment_002.md",
+      "bytes": 1081,
+      "sha256": "88a798d73ee3e9e65a51f2928e7fa04f4161e886bfa4051ffbb3e216f6e11092"
+    },
+    {
+      "path": "C:\\Users\\Kunal Munjal\\Downloads\\video_research\\video-curation\\results\\confirmatory\\raw\\official_assignments.jsonl",
+      "bytes": 21680092,
+      "sha256": "e53f7e59070cea0436053260413e553b1ac5703f304cd328ac71d74922bb5ffa"
+    }
+  ]
+}

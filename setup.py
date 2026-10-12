@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="vqrm",
     version="0.1.0",
-    description="Video Quality Reward Modeling — benchmarking automated metrics against human preference",
+    description="Video quality rewards validated with source-grouped controlled interventions",
     author="kartikmunjal",
     packages=find_packages(where="src"),
     package_dir={"": "src"},

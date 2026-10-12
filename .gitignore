@@ -34,6 +34,7 @@ checkpoints/
 *.safetensors
 *.bin
 *.joblib
+!results/confirmatory/models/*.joblib
 
 # Experiment tracking
 wandb/
